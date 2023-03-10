@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    color: var(--tg-theme-text-color);
+    background: var(--tg-theme-bg-color);
+    /* font-family: 'Play', sans-serif; */
+    font-family: 'Comfortaa', cursive;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.inner {
+    max-width: 450px;
+}
+
+.container {
+    text-align: center;
+    
+}
+
+input, textarea, button {
+    font-family: inherit;
+    font-size: 80%;
+}
+
+input[type="text"] {
+    margin-top: 7px;
+    padding: 8px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(105, 163, 220);
+    box-shadow: 0px 0px 3px rgb(98, 222, 244);
+    outline: none;
+    width:50%;
+}
+
+#extPayment {
+    transition: height 0.5s ease-in;
+    width: 15px;
+    height: 15px;
+    
+}
+
+input[type="text"]:focus {
+    box-shadow: 0px 0px 5px rgb(79, 180, 198);
+}
+
+.btn {
+    /* display: inline-block; */
+    padding: 10px 20px;
+    background: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+
+/*
+var(--tg-theme-bg-color) - цвет фона
+var(--tg-theme-text-color) - цвет текста
+var(--tg-theme-hint-color) - цвет текста подсказки
+var(--tg-theme-link-color) - цвет ссылки
+var(--tg-theme-button-color) - цвет кнопки
+var(--tg-theme-button-text-color) - цвет текста кнопки
+*/
+
+#highload1 {       
+    display: none;
+}
+
+#highload1+.lb1, #highload1+.lb1::before, #highload1+.lb1::after {
+    transition: all .3s;
+}
+#highload1+.lb1 {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+#highload1+.lb1::before {
+    display: block;
+    content: attr(data-offlabel);
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    color: black;
+    font-family: inherit;
+    /* font-size: 19px; */
+}
+#highload1+.lb1::after {
+border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 14px;
+    height: 14px;
+    background-color: white;     
+}
+#highload1:checked+.lb1::before {
+    content: attr(data-onlabel);
+    left: 16px;
+    right: auto;
+    color: #fff;
+}
+#highload1:checked+.lb1::after {
+    left: 23px; 
+    background-color: #f7f7f7;
+}
+
+#highload1+.lb1 {             
+    background-color: #ccc;
+}
+#highload1:checked+.lb1 {
+    /* background-color: green; */
+    background-color: var(--tg-theme-button-text-color);
+    
+}
+#highload1:checked+.lb1::before {
+    color: #fff;
+}
