@@ -125,7 +125,7 @@ border-radius: 50%;
 }
 #highload1:checked+.lb1 {
     /* background-color: green; */
-    background-color: var(--tg-theme-button-color)ж
+    background-color: var(--tg-theme-button-color);
     
 }
 #highload1:checked+.lb1::before {
