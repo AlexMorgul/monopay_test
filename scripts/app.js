@@ -1,17 +1,17 @@
 let tg = window.Telegram.WebApp;
 
-// tg.expand();
-
 tg.MainButton.show();
 tg.MainButton.setText("Сформувати посилання");
+
+setColorScheme();
+
+Telegram.WebApp.onEvent("themeChanged", function() {
+	setColorScheme();
+})
 
 Telegram.WebApp.onEvent("mainButtonClicked", function() {
 	location.replace("https://alexmorgul.github.io/monopay_test/link.html");
 })
-
-// tg.MainButton.textColor = ;
-// tg.MainButton.color = ;
-
 
 function isPaymentExtended() {
 	let chbox = document.getElementById('highload1');
@@ -23,10 +23,15 @@ function isPaymentExtended() {
 	else {
 		ext.style.display = "none";
 	}
-
-	location.replace("https://alexmorgul.github.io/monopay_test/link.html")
 }
 
-// tg.onEvent("themeChanged", eventHandler) {
-// 	ext.style.display = "none";
-// }
+function setColorScheme() {
+	let logo = document.getElementById('logo');
+	let colorScheme = tg.colorScheme;
+
+	if (colorScheme === "dark") {
+		logo.src = "img/monopay_dark_bg.svg";
+	} else {
+		logo.src = "img/monopay_light_bg.svg";
+	}
+}
