@@ -1,16 +1,18 @@
 let tg = window.Telegram.WebApp;
 
-function isPaymentExtended() {
+let chbox = document.getElementById('highload1');
+let ext = document.getElementById('extented');
 
-let chbox = document.getElementById('highload1')
-let ext = document.getElementById('extented')
+tg.onEvent("themeChanged", eventHandler) {
+	ext.style.display = "none";
+}
+
+function isPaymentExtended() {
   
 	if (chbox.checked) {
 		ext.style.display = ""
-		chbox.style.backgroundColor = rgb(79, 180, 198)
 	}
 	else {
 		ext.style.display = "none"
-		
 	}
 }

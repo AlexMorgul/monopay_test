@@ -20,6 +20,11 @@ body {
     text-align: center;
 } */
 
+.logo {
+    text-align: center;
+    margin: 7px;
+}
+
 input, button {
     font-family: inherit;
     font-size: 80%;
