@@ -3,8 +3,6 @@ let tg = window.Telegram.WebApp;
 let chbox = document.getElementById('highload1');
 let ext = document.getElementById('extented');
 
-
-
 function isPaymentExtended() {
   
 	if (chbox.checked) {
