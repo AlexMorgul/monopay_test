@@ -16,46 +16,51 @@ body {
     max-width: 450px;
 }
 
-.container {
+/* .container {
     text-align: center;
-    
-}
+} */
 
-input, textarea, button {
+input, button {
     font-family: inherit;
     font-size: 80%;
+    width: 95%;
+    margin-left: 11.25px;
+}
+
+label {
+    margin-left: 11.25px;
 }
 
 input[type="text"] {
     margin-top: 7px;
-    padding: 8px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 30px;
     border-style: solid;
-    border-width: 1px;
-    border-color: rgb(105, 163, 220);
-    box-shadow: 0px 0px 3px rgb(98, 222, 244);
+    border: none;
+    box-shadow: 0px 0px 5px var(--tg-theme-button-color);
     outline: none;
-    width:50%;
-}
-
-#extPayment {
-    transition: height 0.5s ease-in;
-    width: 15px;
-    height: 15px;
     
+
+    /* border-width: 1px; */
+    /* border-color: rgb(105, 163, 220); */
+    /* border-color: var(--tg-theme-button-color); */
+    /* box-shadow: 0px 0px 5px rgb(100, 173, 186); */
 }
 
-input[type="text"]:focus {
+/* input[type="text"]:focus {
     box-shadow: 0px 0px 5px rgb(79, 180, 198);
-}
+} */
 
 .btn {
-    /* display: inline-block; */
-    padding: 10px 20px;
+    padding: 10px 0;
+    
     background: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
     text-transform: uppercase;
     font-weight: 700;
+    /* border: none; */
+    border-radius: 10px;
+    width: 95%;
 }
 
 
@@ -120,7 +125,7 @@ border-radius: 50%;
 }
 #highload1:checked+.lb1 {
     /* background-color: green; */
-    background-color: var(--tg-theme-button-text-color);
+    background-color: var(--tg-theme-button-color)ж
     
 }
 #highload1:checked+.lb1::before {
