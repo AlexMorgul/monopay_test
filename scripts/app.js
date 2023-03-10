@@ -6,8 +6,11 @@ tg.MainButton.show();
 tg.MainButton.setText("Сформувати посилання");
 
 Telegram.WebApp.onEvent("mainButtonClicked", function() {
-	let test = document.getElementById("test");
-	let p = document.createElement("p");
+	let test = document.getElementById('test');
+	let p = document.createElement('p');
+
+	let ext = document.getElementById('extented');
+	ext.style.display = "";
 
 	p.innerText("Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, rerum.");
 	test.appendChild(p);
