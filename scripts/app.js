@@ -5,12 +5,12 @@ let tg = window.Telegram.WebApp;
 function isPaymentExtended() {
 	let chbox = document.getElementById('highload1');
 	let ext = document.getElementById('extented');
-	
+
 	if (chbox.checked) {
-		ext.style.display = ""
+		ext.style.display = "";
 	}
 	else {
-		ext.style.display = "none"
+		ext.style.display = "none";
 	}
 }
 
