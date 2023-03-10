@@ -58,7 +58,7 @@ input[type="text"] {
     color: var(--tg-theme-button-text-color);
     text-transform: uppercase;
     font-weight: 700;
-    /* border: none; */
+    border: none;
     border-radius: 10px;
     width: 95%;
 }
