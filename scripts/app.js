@@ -1,7 +1,11 @@
 let tg = window.Telegram.WebApp;
 
+tg.ready();
+
 tg.MainButton.show();
-tg.MainButton.setText("Сформувати посилання");
+tg.MainButton.setText("СФОРМУВАТИ ПОСИЛАННЯ");
+
+setColorScheme();
 
 Telegram.WebApp.onEvent("themeChanged", function() {
 	setColorScheme();
