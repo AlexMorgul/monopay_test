@@ -25,8 +25,6 @@ function isPaymentExtended() {
 	else {
 		ext.style.display = "none";
 	}
-
-	setColorScheme();
 }
 
 function setColorScheme() {
