@@ -3,11 +3,8 @@ let tg = window.Telegram.WebApp;
 tg.MainButton.show();
 tg.MainButton.setText("Сформувати посилання");
 
-setColorScheme();
-
 Telegram.WebApp.onEvent("themeChanged", function() {
 	setColorScheme();
-	location.replace("https://alexmorgul.github.io/monopay_test/link.html");
 })
 
 Telegram.WebApp.onEvent("mainButtonClicked", function() {
