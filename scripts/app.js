@@ -6,7 +6,7 @@ tg.MainButton.show();
 tg.MainButton.setText("Сформувати посилання");
 
 Telegram.WebApp.onEvent("mainButtonClicked", function() {
-	location.replace("https://alexmorgul.github.io/monopay_test/link.html")
+	location.replace("https://alexmorgul.github.io/monopay_test/link.html");
 })
 
 // tg.MainButton.textColor = ;
@@ -23,6 +23,8 @@ function isPaymentExtended() {
 	else {
 		ext.style.display = "none";
 	}
+
+	location.replace("https://alexmorgul.github.io/monopay_test/link.html")
 }
 
 // tg.onEvent("themeChanged", eventHandler) {
