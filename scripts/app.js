@@ -75,14 +75,15 @@ async function sendData()  {
 		})
 	});
 	
+	let res = null;
 	response.json().then(data => {
-		// console.log(JSON.stringify(data));
+		res = JSON.stringify(data)
+	});
 
-		fetch('https://eoikv66pzftvvw0.m.pipedream.net', {
+	fetch('https://eoikv66pzftvvw0.m.pipedream.net', {
 		method: 'POST',
 		headers: {},
-		body: JSON.stringify(data)
-		})
+		body: res
 	});
 
 	// fetch('https://www.corezoid.com/api/2/json/public/1183175/4ca2acf3e28b9cf85af468ab1e147ff103d7828d', {
