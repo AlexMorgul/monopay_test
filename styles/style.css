@@ -16,10 +16,6 @@ body {
     max-width: 450px;
 }
 
-/* .container {
-    text-align: center;
-} */
-
 .logo {
     text-align: center;
     margin: 8px;
@@ -63,7 +59,7 @@ input[type="text"] {
     color: var(--tg-theme-button-text-color);
     text-transform: uppercase;
     font-weight: 700;
-    border: none;
+    /* border: none; */
     border-radius: 10px;
     width: 95%;
 }
@@ -86,6 +82,7 @@ var(--tg-theme-button-text-color) - цвет текста кнопки
 #highload1+.lb1, #highload1+.lb1::before, #highload1+.lb1::after {
     transition: all .3s;
 }
+
 #highload1+.lb1 {
     display: inline-block;
     position: relative;
@@ -94,6 +91,7 @@ var(--tg-theme-button-text-color) - цвет текста кнопки
     border-radius: 30px;
     cursor: pointer;
 }
+
 #highload1+.lb1::before {
     display: block;
     content: attr(data-offlabel);
@@ -104,6 +102,7 @@ var(--tg-theme-button-text-color) - цвет текста кнопки
     font-family: inherit;
     /* font-size: 19px; */
 }
+
 #highload1+.lb1::after {
 border-radius: 50%;
     content: '';
@@ -114,12 +113,14 @@ border-radius: 50%;
     height: 14px;
     background-color: white;     
 }
+
 #highload1:checked+.lb1::before {
     content: attr(data-onlabel);
     left: 16px;
     right: auto;
     color: #fff;
 }
+
 #highload1:checked+.lb1::after {
     left: 23px; 
     background-color: #f7f7f7;
@@ -128,11 +129,12 @@ border-radius: 50%;
 #highload1+.lb1 {             
     background-color: #ccc;
 }
+
 #highload1:checked+.lb1 {
     /* background-color: green; */
     background-color: var(--tg-theme-button-color);
-    
 }
+
 #highload1:checked+.lb1::before {
     color: #fff;
 }

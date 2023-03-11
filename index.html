@@ -23,26 +23,30 @@
             
             <div class="test" id="test"></div>
 
-            <label for="amount">Сума оплати: </label>
-            <input type="text" id="amount" name="amount" required><br><br>
+            <form id="myForm">
+                <label for="amount">Сума оплати: </label>
+                <input type="text" id="amount" name="amount" pattern="\d+(\.\d{2})?" required><br><br>
+    
+                <input type="checkbox" id="highload1" name="highload1" onchange="isPaymentExtended()">
+                <label for="highload1" data-onlabel="" data-offlabel="" class="lb1"></label>
+                <span>Додати кошик із товарами</span>
+                <br><br>
+    
+                <div id="extented" style="display: none">
+                    <label for="itemName">Назва товару: </label>
+                    <input type="text" id="itemName" name="itemName"><br><br>
+    
+                    <label for="quantity">Кількість: </label>
+                    <input type="text" id="quantity" name="quantity"><br><br>
+    
+                    <label for="amountPerItem">Сума за один товар: </label>
+                    <input type="text" id="amountPerItem" name="amountPerItem"><br><br>
+                </div>
+    
+                <button class="btn" type="submit">Сформувати посилання</button>
+            </form>
 
-            <input type="checkbox" id="highload1" name="highload1" onchange="isPaymentExtended()">
-            <label for="highload1" data-onlabel="" data-offlabel="" class="lb1"></label>
-            <span>Додати кошик із товарами</span>
-            <br><br>
-
-            <div id="extented" style="display: none">
-                <label for="itemName">Назва товару: </label>
-                <input type="text" id="itemName" name="itemName" required><br><br>
-
-                <label for="quantity">Кількість: </label>
-                <input type="text" id="quantity" name="quantity" required><br><br>
-
-                <label for="amountPerItem">Сума за один товар: </label>
-                <input type="text" id="amountPerItem" name="amountPerItem" required><br><br>
-            </div>
-
-            <!-- <button class="btn" type="submit" onclick="generateLink()">Сформувати посилання</button> -->
+            
             <!-- <a href="https://alexmorgul.github.io/monopay_test/link.html"></a> -->
         </div>
     </div>
