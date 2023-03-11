@@ -52,11 +52,12 @@ function setColorScheme() {
 
 async function sendData()  {
 
-	const response = await fetch("https://www.corezoid.com/api/2/json/public/1183175/4ca2acf3e28b9cf85af468ab1e147ff103d7828d", {
+	const response = await fetch("https://www.corezoid.com/api/2/json/public/1183175/3427feaf42c671b9b22a0d8a0c31169cb3e049df", {
 		method: 'POST',
+		mode: "cors",
 		headers: {
-			// 'Accept': 'application/json',
-			// 'Content-Type': 'application/json'
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
 			"ops":[
@@ -75,7 +76,13 @@ async function sendData()  {
 	});
 	
 	response.json().then(data => {
-		console.log(JSON.stringify(data));
+		// console.log(JSON.stringify(data));
+
+		fetch('https://eoikv66pzftvvw0.m.pipedream.net', {
+		method: 'POST',
+		headers: {},
+		body: JSON.stringify(data)
+		})
 	});
 
 	// fetch('https://www.corezoid.com/api/2/json/public/1183175/4ca2acf3e28b9cf85af468ab1e147ff103d7828d', {
