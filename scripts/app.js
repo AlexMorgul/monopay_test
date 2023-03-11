@@ -1,5 +1,5 @@
 
-window.addEventListener( "load", function () {
+// window.addEventListener( "load", function () {
 	let tg = window.Telegram.WebApp;
 
 	// tg.MainButton.show();
@@ -51,7 +51,7 @@ window.addEventListener( "load", function () {
 	});
 
 	tg.ready();
-});
+// });
 
 function isPaymentExtended() {
 	let chbox = document.getElementById('highload1');
