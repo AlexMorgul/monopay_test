@@ -34,7 +34,7 @@
 		sendData(data);
 	});
 
-	input.addEventListener('amount', function() {
+	amount.addEventListener('amount', function() {
 		this.value != null ? tg.MainButton.show() : tg.MainButton.hide();
 	});
 
