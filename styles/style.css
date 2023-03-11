@@ -4,7 +4,6 @@ body {
     font-size: 18px;
     color: var(--tg-theme-text-color);
     background: var(--tg-theme-bg-color);
-    /* font-family: 'Play', sans-serif; */
     font-family: 'Comfortaa', cursive;
 }
 
@@ -40,17 +39,7 @@ input[type="text"] {
     border: none;
     box-shadow: 0px 0px 5px var(--tg-theme-button-color);
     outline: none;
-    
-
-    /* border-width: 1px; */
-    /* border-color: rgb(105, 163, 220); */
-    /* border-color: var(--tg-theme-button-color); */
-    /* box-shadow: 0px 0px 5px rgb(100, 173, 186); */
 }
-
-/* input[type="text"]:focus {
-    box-shadow: 0px 0px 5px rgb(79, 180, 198);
-} */
 
 .btn {
     padding: 10px 0;
@@ -64,7 +53,9 @@ input[type="text"] {
     width: 95%;
 }
 
-
+.btn:active {
+    background: #4e96cc;
+}
 
 /*
 var(--tg-theme-bg-color) - цвет фона
@@ -100,7 +91,6 @@ var(--tg-theme-button-text-color) - цвет текста кнопки
     right: 10px;
     color: black;
     font-family: inherit;
-    /* font-size: 19px; */
 }
 
 #highload1+.lb1::after {
@@ -131,7 +121,6 @@ border-radius: 50%;
 }
 
 #highload1:checked+.lb1 {
-    /* background-color: green; */
     background-color: var(--tg-theme-button-color);
 }
 

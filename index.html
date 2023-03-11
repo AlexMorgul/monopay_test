@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet"> -->
     <title>Test</title>
 </head>
 
@@ -25,7 +24,7 @@
 
             <form id="myForm">
                 <label for="amount">Сума оплати: </label>
-                <input type="text" id="amount" name="amount" pattern="\d+(\.\d{2})?" required><br><br>
+                <input type="text" id="amount" name="amount" pattern="[1-9]\d*(\.\d{2})?" required><br><br>
     
                 <input type="checkbox" id="highload1" name="highload1" onchange="isPaymentExtended()">
                 <label for="highload1" data-onlabel="" data-offlabel="" class="lb1"></label>
