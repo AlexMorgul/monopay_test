@@ -34,8 +34,8 @@
 		sendData(data);
 	});
 
-	amount.addEventListener('amount', function() {
-		this.value != null ? tg.MainButton.show() : tg.MainButton.hide();
+	amount.addEventListener('input', function() {
+		this.value != '' ? tg.MainButton.show() : tg.MainButton.hide();
 	});
 
 	Telegram.WebApp.onEvent('themeChanged', function() {
