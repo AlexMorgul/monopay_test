@@ -54,6 +54,7 @@ async function sendData()  {
 
 	const response = await fetch("https://www.corezoid.com/api/2/json/public/1183175/3427feaf42c671b9b22a0d8a0c31169cb3e049df", {
 		method: 'POST',
+		mode: "no-cors",
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
