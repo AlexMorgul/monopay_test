@@ -112,7 +112,7 @@ function generateBodyRequest() {
 		data.basketOrder[0] = {
 			"name": formData.get('itemName'),
 			"qty": Number(formData.get('quantity')),
-			"sum": formData.get('amountPerItem')
+			"sum": Number(formData.get('amountPerItem'))
 		};
 	}
 
