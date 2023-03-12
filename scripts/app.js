@@ -35,14 +35,14 @@ Telegram.WebApp.onEvent('themeChanged', function() {
 });
 
 Telegram.WebApp.onEvent('mainButtonClicked', function() {
-	let isValid = validateValue();
+	// let isValid = validateValue();
 	
-	if (isValid) {
-		let data = generateBodyRequest();
+	// if (isValid) {
+	// 	let data = generateBodyRequest();
 		sendData(data);
 
 		// tg.close();
-	}
+	// }
 
 	
 });
