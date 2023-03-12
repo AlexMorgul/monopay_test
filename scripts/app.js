@@ -51,7 +51,9 @@ function validateValue() {
 
 	if (!isValid) {
 		errors.innerHTML = '<p style="color: red; margin-left: 11.25px;">- Лише ціле або дійсне число (.00)</p>';
-	}	
+	}
+
+	return isValid;
 } 
 
 function isPaymentExtended() {
