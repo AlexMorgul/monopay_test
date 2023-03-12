@@ -41,7 +41,7 @@ Telegram.WebApp.onEvent('mainButtonClicked', function() {
 		let data = generateBodyRequest();
 		sendData(data);
 
-		tg.close();
+		// tg.close();
 	}
 
 	
