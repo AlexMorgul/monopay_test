@@ -71,6 +71,8 @@ function generateBodyRequest() {
 			"qty": Number(formData.get('quantity')),
 			"sum": Number(formData.get('amountPerItem'))
 		};
+
+		data.queryId = tg.initDataUnsafe?.query_id;
 	}
 
 	return data;
