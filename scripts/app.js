@@ -5,7 +5,10 @@ tg.MainButton.setText("СФОРМУВАТИ ПОСИЛАННЯ");
 
 const formElement = document.getElementById('myForm');
 const chbox = document.getElementById('highload1');
+const ext = document.getElementById('extented');
+
 const amount = document.getElementById('amount');
+const amountRegExp = /[1-9]\d*(\.\d{2})?/;
 
 setColorScheme();
 
@@ -18,7 +21,12 @@ formElement.addEventListener("submit", function (event) {
 });
 
 amount.addEventListener('input', function() {
-	this.value != '' ? tg.MainButton.show() : tg.MainButton.hide();
+	const test = document.getElementById('test');
+	test.innerHTML = "<p>testim!</p>";
+
+	const valid = amountRegExp.test(amount.value);
+
+	(this.value != '' || !valid) ? tg.MainButton.show() : tg.MainButton.hide();
 });
 
 Telegram.WebApp.onEvent('themeChanged', function() {
@@ -34,9 +42,6 @@ Telegram.WebApp.onEvent('mainButtonClicked', function() {
 tg.ready();
 
 function isPaymentExtended() {
-	let chbox = document.getElementById('highload1');
-	let ext = document.getElementById('extented');
-
 	if (chbox.checked) {
 		ext.style.display = "";
 	}
