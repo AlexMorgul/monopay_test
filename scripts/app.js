@@ -95,7 +95,7 @@ function generateBodyRequest() {
 		};
 	}
 
-	data.queryId = tg.initDataUnsafe?.query_id;
+	data.queryId = tg.initDataUnsafe.query_id;
 
 	return data;
 }
