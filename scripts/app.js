@@ -39,11 +39,12 @@ Telegram.WebApp.onEvent('mainButtonClicked', function() {
 	
 	if (isValid) {
 		let data = generateBodyRequest();
-		data = JSON.stringify(data);
 		sendData(data);
-	} else {
-		return false;
+
+		tg.close();
 	}
+
+	
 });
 
 tg.ready();
@@ -104,7 +105,7 @@ function sendData(data)  {
 	const response = fetch("https://www.corezoid.com/api/2/json/public/1183175/3427feaf42c671b9b22a0d8a0c31169cb3e049df", {
 		method: 'POST',
 		headers: {},
-		body: data
+		body: JSON.stringify(data)
 	});
 }
 
