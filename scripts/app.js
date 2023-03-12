@@ -26,7 +26,7 @@ amount.addEventListener('input', function() {
 
 	const valid = amountRegExp.test(amount.value);
 
-	(this.value != '' || !valid) ? tg.MainButton.show() : tg.MainButton.hide();
+	(this.value != '' || valid) ? tg.MainButton.show() : tg.MainButton.hide();
 });
 
 Telegram.WebApp.onEvent('themeChanged', function() {
