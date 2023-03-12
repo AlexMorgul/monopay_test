@@ -72,7 +72,7 @@ function generateBodyRequest() {
 			"sum": Number(formData.get('amountPerItem'))
 		};
 
-		data.queryId = tg.initDataUnsafe?.query_id;
+		data.queryId = tg.initDataUnsafe.query_id;
 	}
 
 	return data;
