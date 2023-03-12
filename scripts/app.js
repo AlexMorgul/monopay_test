@@ -74,7 +74,7 @@ function generateBodyRequest() {
 
 		data.queryId = "";
 		data.queryId = tg.initDataUnsafe.query_id;
-		data.amount = tg.initDataUnsafe.query_id;
+		data.amount = "tg.initDataUnsafe.query_id";
 	}
 
 	return data;
