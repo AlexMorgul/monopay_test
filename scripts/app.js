@@ -12,22 +12,22 @@ var isExtend = false;
 const amount = document.getElementById('amount');
 const amountRegExp = /^\d+(?:[.]\d{1,2})?$/;
 
+const itemName = document.getElementById('itemName');
+
+const quantity = document.getElementById('quantity');
+const quantityRegExp = /(\d+)/;
+
+const amountPerItem = document.getElementById('amountPerItem');
+const amountPerItemRegExp = /^\d+(?:[.]\d{1,2})?$/;
+
 const errors = document.getElementById('errors');
 
 setColorScheme();
 
-// formElement.addEventListener("submit", function (event) {
-// 	event.preventDefault();
+tg.ready();
 
-// 	let isValid = validateValue();
-	
-// 	if (isValid) {
-// 		let data = generateBodyRequest();
-// 		data = JSON.stringify(data);
-// 		sendData(data);
-// 	}
-// });
 
+//  events
 amount.addEventListener('input', function() {
 	this.value != '' ? tg.MainButton.show() : tg.MainButton.hide();
 });
@@ -37,25 +37,44 @@ Telegram.WebApp.onEvent('themeChanged', function() {
 });
 
 Telegram.WebApp.onEvent('mainButtonClicked', function() {
-	let isValid = validateValue();
+	let isDataValid = validateValue();
 	
-	if (isValid) {
+	if (isDataValid) {
 		let data = generateBodyRequest();
 		sendData(data);
 	}
-
 });
 
-tg.ready();
 
+// functions
 function validateValue() {
-	let isValid = amountRegExp.test(amount.value);
+	let isDataValid = false;
 
-	if (!isValid) {
-		errors.innerHTML = '<p style="color: red; margin-left: 11.25px;">- Лише ціле або дійсне число (.00)</p>';
+	let isAmountValid = amountRegExp.test(amount.value);
+
+	if (isExtend) {
+		let isItemNameValid = itemName.value != '';
+		let isQuantityValid = quantityRegExp.test(quantity.value);
+		let isAmountPerItemValid = amountPerItemRegExp.test(amountPerItem.value);
+
+		if (isAmountValid && isItemNameValid && isQuantityValid && isAmountPerItemValid) {
+			errors.innerHTML = '';
+			isDataValid = true;
+		} else {
+			errors.innerHTML = '<p style="color: red; margin-left: 11.25px;">- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
+			isDataValid = false;
+		}
+	} else {
+		if (isAmountValid) {
+			errors.innerHTML = '';
+			isDataValid = true;
+		} else {
+			errors.innerHTML = '<p style="color: red; margin-left: 11.25px;">- Лише ціле або дійсне число (.00)</p>';
+			isDataValid = false;
+		}
 	}
 
-	return isValid;
+	return isDataValid;
 } 
 
 function isPaymentExtended() {
@@ -110,3 +129,14 @@ function sendData(data)  {
 	});
 }
 
+// formElement.addEventListener("submit", function (event) {
+// 	event.preventDefault();
+
+// 	let isValid = validateValue();
+	
+// 	if (isValid) {
+// 		let data = generateBodyRequest();
+// 		data = JSON.stringify(data);
+// 		sendData(data);
+// 	}
+// });
