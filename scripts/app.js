@@ -8,45 +8,51 @@ const chbox = document.getElementById('highload1');
 const ext = document.getElementById('extented');
 
 const amount = document.getElementById('amount');
-const amountRegExp = /[1-9]\d*(\.\d{2})?/;
+const amountRegExp = /^\d+(?:[.]\d{1,2})?$/;
+
+const errors = document.getElementById('errors');
 
 setColorScheme();
 
 formElement.addEventListener("submit", function (event) {
 	event.preventDefault();
+
+	let isValid = validateValue();
 	
-	let data = generateBodyRequest();
-	data = JSON.stringify(data);
-	sendData(data);
+	if (isValid) {
+		let data = generateBodyRequest();
+		data = JSON.stringify(data);
+		sendData(data);
+	}
 });
 
 amount.addEventListener('input', function() {
-	const test = document.getElementById('test');
-	test.innerHTML = "<p>testim!</p>";
-
-	const valid = amountRegExp.test(amount.value);
-
-if (this.value != '') {
-    if (valid) {
-        tg.MainButton.show();
-    } else {
-        tg.MainButton.hide();
-    }
-} else {
-    tg.MainButton.hide();
-}
+	this.value != '' ? tg.MainButton.show() : tg.MainButton.hide();
+});
 
 Telegram.WebApp.onEvent('themeChanged', function() {
 	setColorScheme();
 });
 
 Telegram.WebApp.onEvent('mainButtonClicked', function() {
-	let data = generateBodyRequest();
-	data = JSON.stringify(data);
-	sendData(data);
+	let isValid = validateValue();
+	
+	if (isValid) {
+		let data = generateBodyRequest();
+		data = JSON.stringify(data);
+		sendData(data);
+	}
 });
 
 tg.ready();
+
+function validateValue() {
+	let isValid = amountRegExp.test(amount.value);
+
+	if (!isValid) {
+		errors.innerHTML = '<p style="color: red; margin-left: 11.25px;">- Лише ціле або дійсне число (.00)</p>';
+	}	
+} 
 
 function isPaymentExtended() {
 	if (chbox.checked) {
