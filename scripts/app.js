@@ -4,8 +4,10 @@ let tg = window.Telegram.WebApp;
 tg.MainButton.setText("СФОРМУВАТИ ПОСИЛАННЯ");
 
 const formElement = document.getElementById('myForm');
+
 const chbox = document.getElementById('highload1');
 const ext = document.getElementById('extented');
+var isExtend = false;
 
 const amount = document.getElementById('amount');
 const amountRegExp = /^\d+(?:[.]\d{1,2})?$/;
@@ -14,17 +16,17 @@ const errors = document.getElementById('errors');
 
 setColorScheme();
 
-formElement.addEventListener("submit", function (event) {
-	event.preventDefault();
+// formElement.addEventListener("submit", function (event) {
+// 	event.preventDefault();
 
-	let isValid = validateValue();
+// 	let isValid = validateValue();
 	
-	if (isValid) {
-		let data = generateBodyRequest();
-		data = JSON.stringify(data);
-		sendData(data);
-	}
-});
+// 	if (isValid) {
+// 		let data = generateBodyRequest();
+// 		data = JSON.stringify(data);
+// 		sendData(data);
+// 	}
+// });
 
 amount.addEventListener('input', function() {
 	this.value != '' ? tg.MainButton.show() : tg.MainButton.hide();
@@ -35,16 +37,13 @@ Telegram.WebApp.onEvent('themeChanged', function() {
 });
 
 Telegram.WebApp.onEvent('mainButtonClicked', function() {
-	// let isValid = validateValue();
+	let isValid = validateValue();
 	
-	// if (isValid) {
-	// 	let data = generateBodyRequest();
+	if (isValid) {
+		let data = generateBodyRequest();
 		sendData(data);
+	}
 
-		// tg.close();
-	// }
-
-	
 });
 
 tg.ready();
@@ -62,9 +61,11 @@ function validateValue() {
 function isPaymentExtended() {
 	if (chbox.checked) {
 		ext.style.display = "";
+		isExtend = true;
 	}
 	else {
 		ext.style.display = "none";
+		isExtend = false;
 	}
 }
 
@@ -86,7 +87,7 @@ function generateBodyRequest() {
 		"amount": Number(formData.get('amount'))
 	};
 
-	if (chbox.checked) {
+	if (isExtend) {
 		data.basketOrder = [];
 
 		data.basketOrder[0] = {
