@@ -107,7 +107,7 @@ function generateBodyRequest() {
 	};
 
 	if (isExtend) {
-		data.basketOrder = [];
+		data.merchantPaymInfo.basketOrder = [];
 
 		data.basketOrder[0] = {
 			"name": formData.get('itemName'),
