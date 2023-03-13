@@ -15,7 +15,7 @@ const amountRegExp = /^\d+(?:[.]\d{1,2})?$/;
 const itemName = document.getElementById('itemName');
 
 const quantity = document.getElementById('quantity');
-const quantityRegExp = /^\d+?$/;
+const quantityRegExp = /^\d[1-9]+?$/;
 
 
 const amountPerItem = document.getElementById('amountPerItem');
