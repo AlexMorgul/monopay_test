@@ -37,6 +37,7 @@ amount.addEventListener('input', function() {
 
 formElement.addEventListener("submit", function (event) {
 	event.preventDefault();
+	let data = generateBodyRequest();
 });
 
 Telegram.WebApp.onEvent('themeChanged', function() {
@@ -148,6 +149,8 @@ function generateBodyRequest() {
 			};
 		}
 	}
+
+	console.log(data);
 
 	data.queryId = tg.initDataUnsafe.query_id;
 
