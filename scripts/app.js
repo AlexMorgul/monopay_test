@@ -4,9 +4,11 @@ let tg = window.Telegram.WebApp;
 tg.MainButton.setText("СФОРМУВАТИ ПОСИЛАННЯ");
 
 const formElement = document.getElementById('myForm');
+var nPositions = 0;
 
 const chbox = document.getElementById('highload1');
-const ext = document.getElementById('extented');
+const extented = document.getElementById('extented');
+const productFields = document.getElementById('productFields');
 var isExtend = false;
 
 const amount = document.getElementById('amount');
@@ -31,6 +33,10 @@ tg.ready();
 //  events
 amount.addEventListener('input', function() {
 	this.value != '' ? tg.MainButton.show() : tg.MainButton.hide();
+});
+
+formElement.addEventListener("submit", function (event) {
+	event.preventDefault();
 });
 
 Telegram.WebApp.onEvent('themeChanged', function() {
@@ -80,13 +86,35 @@ function validateValue() {
 
 function isPaymentExtended() {
 	if (chbox.checked) {
-		ext.style.display = "";
+		extented.style.display = "";
 		isExtend = true;
+		nPositions = 1;
+
+		productFields.innerHTML = getFieldsTemplate();
 	}
 	else {
-		ext.style.display = "none";
+		extented.style.display = "none";
 		isExtend = false;
+		nPositions = 0;
+		productFields.innerHTML = '';
 	}
+}
+
+function addItem() {
+	nPositions++;
+	productFields.innerHTML += getFieldsTemplate();
+}
+
+function getFieldsTemplate() {
+	let indexName = 'itemName_' + nPositions;
+	let indexQuantity = 'quantity_' + nPositions;
+	let indexAmountPerItem = 'amountPerItem_' + nPositions;
+
+	return '<hr><p class="item_text">Товар №' + nPositions + '</p><label for="' + indexName + 
+		'">Назва товару:</label><input type="text" id="' + indexName + '" name="' + indexName + '"><br><br><label for="' 
+		+ indexQuantity + '">Кількість:</label><input type="text" id="'	+ indexQuantity + '" name="' + indexQuantity +
+		'"><br><br><label for="' + indexAmountPerItem + '">Сума за один товар:</label><input type="text" id="' + 
+		indexAmountPerItem + '" name="' + indexAmountPerItem + '"><br><br>';
 }
 
 function setColorScheme() {
@@ -112,13 +140,13 @@ function generateBodyRequest() {
 			"basketOrder": []
 		};
 
-		console.log(data);
-
-		data.merchantPaymInfo.basketOrder[0] = {
-			"name": formData.get('itemName'),
-			"qty": Number(formData.get('quantity')),
-			"sum": Number(formData.get('amountPerItem'))
-		};
+		for (let i = 0; i < nPositions; i++) {
+			data.merchantPaymInfo.basketOrder[0] = {
+				"name": formData.get('itemName_' + i),
+				"qty": Number(formData.get('quantity_' + i)),
+				"sum": Number(formData.get('amountPerItem_' + i))
+			};
+		}
 	}
 
 	data.queryId = tg.initDataUnsafe.query_id;
@@ -133,15 +161,3 @@ async function sendData(data)  {
 		body: JSON.stringify(data)
 	});
 }
-
-// formElement.addEventListener("submit", function (event) {
-// 	event.preventDefault();
-
-// 	let isValid = validateValue();
-	
-// 	if (isValid) {
-// 		let data = generateBodyRequest();
-// 		data = JSON.stringify(data);
-// 		sendData(data);
-// 	}
-// });

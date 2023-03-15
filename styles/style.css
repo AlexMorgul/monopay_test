@@ -20,7 +20,7 @@ body {
     margin: 8px;
 }
 
-input, button {
+input {
     font-family: inherit;
     font-size: 80%;
     width: 95%;
@@ -41,20 +41,27 @@ input[type="text"] {
     outline: none;
 }
 
+.item_text {
+    text-align: center;
+    font-weight: 600;
+}
+
 .btn {
-    padding: 10px 0;
-    
-    background: var(--tg-theme-button-color);
+    padding: 10px 10px;
+    margin-right: 11.25px;
+    float: right;
+    background: #4e96cc;
     color: var(--tg-theme-button-text-color);
-    text-transform: uppercase;
-    font-weight: 700;
     border: none;
+    font-family: 'Comfortaa', cursive;
     border-radius: 10px;
-    width: 95%;
+    box-shadow: 0 5px #999;
 }
 
 .btn:active {
-    background: #4e96cc;
+    background: var(--tg-theme-button-color);
+    box-shadow: 0 3px #666;
+    transform: translateY(3px);
 }
 
 /*
