@@ -49,6 +49,7 @@ input[type="text"] {
 .btn {
     padding: 10px 10px;
     margin-right: 11.25px;
+    margin-bottom: 11.25px;
     float: right;
     background: #4e96cc;
     color: var(--tg-theme-button-text-color);
