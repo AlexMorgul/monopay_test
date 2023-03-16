@@ -44,8 +44,7 @@ Telegram.WebApp.onEvent('themeChanged', function() {
 });
 
 Telegram.WebApp.onEvent('mainButtonClicked', function() {
-	// let isDataValid = validateValue();
-	let isDataValid = true;
+	let isDataValid = validateValue();
 	
 	if (isDataValid) {
 		let data = generateBodyRequest();
