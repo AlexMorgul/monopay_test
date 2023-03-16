@@ -56,31 +56,55 @@ Telegram.WebApp.onEvent('mainButtonClicked', function() {
 
 // functions
 function validateValue() {
-	let isDataValid = false;
+	let isDataValid = true;
 
 	let isAmountValid = amountRegExp.test(amount.value);
 
-	if (isExtend) {
+	if (!isAmountValid) {
+		isDataValid = false;
+		return isDataValid;
+	}
+
+	for (let i = 0; i < nPositions; i++) {
+		const itemName = document.getElementById('itemName_'+ (i+1));
+		const quantity = document.getElementById('quantity_'+ (i+1));
+		const amountPerItem = document.getElementById('amountPerItem_'+ (i+1));
+
 		let isItemNameValid = itemName.value != '';
 		let isQuantityValid = quantityRegExp.test(quantity.value);
 		let isAmountPerItemValid = amountPerItemRegExp.test(amountPerItem.value);
 
-		if (isAmountValid && isItemNameValid && isQuantityValid && isAmountPerItemValid) {
-			errors.innerHTML = '';
-			isDataValid = true;
-		} else {
-			errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
+		if (!isItemNameValid || !isQuantityValid || !isAmountPerItemValid) {
+			errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
+			'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
+
 			isDataValid = false;
-		}
-	} else {
-		if (isAmountValid) {
-			errors.innerHTML = '';
-			isDataValid = true;
-		} else {
-			errors.innerHTML = '<p style="color: red; margin-left: 11.25px;">- Лише ціле або дійсне число (.00)</p>';
-			isDataValid = false;
-		}
+			break;
 	}
+
+	// if (isExtend) {
+	// 	let isItemNameValid = itemName.value != '';
+	// 	let isQuantityValid = quantityRegExp.test(quantity.value);
+	// 	let isAmountPerItemValid = amountPerItemRegExp.test(amountPerItem.value);
+
+	// 	if (isAmountValid && isItemNameValid && isQuantityValid && isAmountPerItemValid) {
+	// 		errors.innerHTML = '';
+	// 		isDataValid = true;
+	// 	} else {
+	// 		errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
+	// 		'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
+
+	// 		isDataValid = false;
+	// 	}
+	// } else {
+	// 	if (isAmountValid) {
+	// 		errors.innerHTML = '';
+	// 		isDataValid = true;
+	// 	} else {
+	// 		errors.innerHTML = '<p style="color: red; margin-left: 11.25px;">- Лише ціле або дійсне число (.00)</p>';
+	// 		isDataValid = false;
+	// 	}
+	// }
 
 	return isDataValid;
 } 
