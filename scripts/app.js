@@ -82,6 +82,8 @@ function validateValue() {
 		}
 	}
 
+	return true;
+
 	// if (isExtend) {
 	// 	let isItemNameValid = itemName.value != '';
 	// 	let isQuantityValid = quantityRegExp.test(quantity.value);
