@@ -213,11 +213,15 @@ function generateBodyRequest() {
 			"basketOrder": []
 		};
 
+		let name = formData.get('itemName_' + (i+1));
+		let qty = Number(formData.get('quantity_' + (i+1)));
+		let sum = Number(formData.get('amountPerItem_' + (i+1)));
+
 		for (let i = 0; i < nPositions; i++) {
 			data.merchantPaymInfo.basketOrder.push({
-				"name": formData.get('itemName_' + (i+1)),
-				"qty": Number(formData.get('quantity_' + (i+1))),
-				"sum": Number(formData.get('amountPerItem_' + (i+1)))
+				"name": name,
+				"qty": Math.round(qty*100),
+				"sum": Math.round(sum*100),
 			});
 		}
 	}	
