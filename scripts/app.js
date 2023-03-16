@@ -80,6 +80,7 @@ function validateValue() {
 
 			isDataValid = false;
 			break;
+		}
 	}
 
 	// if (isExtend) {
