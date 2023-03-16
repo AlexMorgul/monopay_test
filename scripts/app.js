@@ -214,22 +214,22 @@ function generateBodyRequest() {
 
 		for (let i = 0; i < nPositions; i++) {
 			data.merchantPaymInfo.basketOrder[0] = {
-				"name": formData.get('itemName_' + i+1),
-				"qty": Number(formData.get('quantity_' + i+1)),
-				"sum": Number(formData.get('amountPerItem_' + i+1))
+				"name": formData.get('itemName_' + (i+1)),
+				"qty": Number(formData.get('quantity_' + (i+1))),
+				"sum": Number(formData.get('amountPerItem_' + (i+1)))
 			};
 		}
 	}	
 
 	data.queryId = tg.initDataUnsafe.query_id;
-
-	let obj = {};
-	formData.forEach((value, key) => obj[key] = value);
-	let json = JSON.stringify(obj);
-
-	console.log(json);
-
+	
 	return data;
+}
+
+function checkResult() {
+
+	let data = generateBodyRequest();
+	sendData(data);
 }
 
 async function sendData(data)  {
