@@ -203,17 +203,16 @@ function setColorScheme() {
 
 function generateBodyRequest() {
 	const formData = new FormData(formElement);
-		
+	
+	const amount = Number(formData.get('amount'));
 	let data = {
-		"amount": Number(formData.get('amount'))
+		"amount": Math.round(amount*100)
 	};
 
 	if (isExtend) {
 		data.merchantPaymInfo = {
 			"basketOrder": []
 		};
-
-		
 
 		for (let i = 0; i < nPositions; i++) {
 
@@ -223,7 +222,7 @@ function generateBodyRequest() {
 
 			data.merchantPaymInfo.basketOrder.push({
 				"name": name,
-				"qty": Math.round(qty*100),
+				"qty": qty,
 				"sum": Math.round(sum*100),
 			});
 		}
