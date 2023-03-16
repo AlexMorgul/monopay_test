@@ -55,15 +55,13 @@ Telegram.WebApp.onEvent('mainButtonClicked', function() {
 
 // functions
 function validateValue() {
-	let isDataValid = true;
-
 	let isAmountValid = amountRegExp.test(amount.value);
 
 	if (!isAmountValid) {
 		errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
 			'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
-		isDataValid = false;
-		return isDataValid;
+		window.scrollTo(0,0);
+		return false;
 	}
 
 	for (let i = 0; i < nPositions; i++) {
@@ -79,8 +77,8 @@ function validateValue() {
 			errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
 			'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
 
-			isDataValid = false;
-			break;
+			window.scrollTo(0,0);
+			return false;
 		}
 	}
 
@@ -107,8 +105,6 @@ function validateValue() {
 	// 		isDataValid = false;
 	// 	}
 	// }
-
-	return isDataValid;
 } 
 
 function isPaymentExtended() {
