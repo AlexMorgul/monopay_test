@@ -64,21 +64,23 @@ function validateValue() {
 		return false;
 	}
 
-	for (let i = 0; i < nPositions; i++) {
-		const itemName = document.getElementById('itemName_'+ (i+1));
-		const quantity = document.getElementById('quantity_'+ (i+1));
-		const amountPerItem = document.getElementById('amountPerItem_'+ (i+1));
+	if (isExtend) {
+		for (let i = 0; i < nPositions; i++) {
+			const itemName = document.getElementById('itemName_'+ (i+1));
+			const quantity = document.getElementById('quantity_'+ (i+1));
+			const amountPerItem = document.getElementById('amountPerItem_'+ (i+1));
 
-		let isItemNameValid = itemName.value != '';
-		let isQuantityValid = quantityRegExp.test(quantity.value);
-		let isAmountPerItemValid = amountPerItemRegExp.test(amountPerItem.value);
+			let isItemNameValid = itemName.value != '';
+			let isQuantityValid = quantityRegExp.test(quantity.value);
+			let isAmountPerItemValid = amountPerItemRegExp.test(amountPerItem.value);
 
-		if (!isItemNameValid || !isQuantityValid || !isAmountPerItemValid) {
-			errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
-			'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
+			if (!isItemNameValid || !isQuantityValid || !isAmountPerItemValid) {
+				errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
+				'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
 
-			window.scrollTo(0,0);
-			return false;
+				window.scrollTo(0,0);
+				return false;
+			}
 		}
 	}
 
