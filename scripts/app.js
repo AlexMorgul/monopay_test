@@ -213,11 +213,14 @@ function generateBodyRequest() {
 			"basketOrder": []
 		};
 
-		let name = formData.get('itemName_' + (i+1));
-		let qty = Number(formData.get('quantity_' + (i+1)));
-		let sum = Number(formData.get('amountPerItem_' + (i+1)));
+		
 
 		for (let i = 0; i < nPositions; i++) {
+
+			let name = formData.get('itemName_' + (i+1));
+			let qty = Number(formData.get('quantity_' + (i+1)));
+			let sum = Number(formData.get('amountPerItem_' + (i+1)));
+
 			data.merchantPaymInfo.basketOrder.push({
 				"name": name,
 				"qty": Math.round(qty*100),
@@ -227,6 +230,8 @@ function generateBodyRequest() {
 	}	
 
 	data.queryId = tg.initDataUnsafe.query_id;
+
+	console.log(data);
 
 	return data;
 }
