@@ -60,6 +60,8 @@ function validateValue() {
 	let isAmountValid = amountRegExp.test(amount.value);
 
 	if (!isAmountValid) {
+		errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
+			'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
 		isDataValid = false;
 		return isDataValid;
 	}
