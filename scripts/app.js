@@ -14,13 +14,13 @@ var isExtend = false;
 const amount = document.getElementById('amount');
 const amountRegExp = /^\d+(?:[.]\d{1,2})?$/;
 
-const itemName = document.getElementById('itemName');
+// const itemName = document.getElementById('itemName');
 
-const quantity = document.getElementById('quantity');
+// const quantity = document.getElementById('quantity');
 const quantityRegExp = /^([1-9])+?$/;
 
 
-const amountPerItem = document.getElementById('amountPerItem');
+// const amountPerItem = document.getElementById('amountPerItem');
 const amountPerItemRegExp = /^\d+(?:[.]\d{1,2})?$/;
 
 const errors = document.getElementById('errors');
@@ -44,7 +44,8 @@ Telegram.WebApp.onEvent('themeChanged', function() {
 });
 
 Telegram.WebApp.onEvent('mainButtonClicked', function() {
-	let isDataValid = validateValue();
+	// let isDataValid = validateValue();
+	let isDataValid = true;
 	
 	if (isDataValid) {
 		let data = generateBodyRequest();
@@ -213,16 +214,16 @@ function generateBodyRequest() {
 		};
 
 		for (let i = 0; i < nPositions; i++) {
-			data.merchantPaymInfo.basketOrder[0] = {
+			data.merchantPaymInfo.basketOrder.push({
 				"name": formData.get('itemName_' + (i+1)),
 				"qty": Number(formData.get('quantity_' + (i+1))),
 				"sum": Number(formData.get('amountPerItem_' + (i+1)))
-			};
+			});
 		}
 	}	
 
 	data.queryId = tg.initDataUnsafe.query_id;
-	
+
 	return data;
 }
 
