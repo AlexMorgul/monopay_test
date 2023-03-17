@@ -1,32 +1,21 @@
 
 let tg = window.Telegram.WebApp;
 
-tg.MainButton.setText("СФОРМУВАТИ ПОСИЛАННЯ");
-
 const formElement = document.getElementById('myForm');
-var nPositions = 0;
-
 const chbox = document.getElementById('highload1');
 const extented = document.getElementById('extented');
 const goods = document.getElementById('goods');
-var isExtend = false;
-
 const amount = document.getElementById('amount');
-const amountRegExp = /^\d+(?:[.]\d{1,2})?$/;
-
-// const itemName = document.getElementById('itemName');
-
-// const quantity = document.getElementById('quantity');
-const quantityRegExp = /^([1-9]+)+?$/;
-
-
-// const amountPerItem = document.getElementById('amountPerItem');
-const amountPerItemRegExp = /^\d+(?:[.]\d{1,2})?$/;
-
 const errors = document.getElementById('errors');
 
-setColorScheme();
+const priceRegExp = /^\d+(?:[.]\d{1,2})?$/;
+const quantityRegExp = /^([1-9])[0-9]*$/;
 
+var nPositions = 0;
+var isExtend = false;
+
+setColorScheme();
+tg.MainButton.setText("СФОРМУВАТИ ПОСИЛАННЯ");
 tg.ready();
 
 
@@ -55,7 +44,7 @@ Telegram.WebApp.onEvent('mainButtonClicked', function() {
 
 // functions
 function validateValue() {
-	let isAmountValid = amountRegExp.test(amount.value);
+	let isAmountValid = priceRegExp.test(amount.value);
 
 	if (!isAmountValid) {
 		errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
@@ -72,7 +61,7 @@ function validateValue() {
 
 			let isItemNameValid = itemName.value != '';
 			let isQuantityValid = quantityRegExp.test(quantity.value);
-			let isAmountPerItemValid = amountPerItemRegExp.test(amountPerItem.value);
+			let isAmountPerItemValid = priceRegExp.test(amountPerItem.value);
 
 			if (!isItemNameValid || !isQuantityValid || !isAmountPerItemValid) {
 				errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
