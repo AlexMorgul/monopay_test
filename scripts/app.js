@@ -44,6 +44,7 @@ Telegram.WebApp.onEvent('mainButtonClicked', function() {
 	if (isExtend) {
 		fieldsData = getFieldsData();
 		let isDataValid = fieldsValidate(fieldsData);
+		
 
 		if (!isDataValid) {
 			setErrors();
@@ -58,19 +59,43 @@ Telegram.WebApp.onEvent('mainButtonClicked', function() {
 
 // functions
 function fieldsValidate(fieldsData) {
-	fieldsData.itemName.forEach(name => {
-		if (name == '') return false;
-	});
+	if (!checkItemName(fieldsData.itemName)) return false;
 
-	fieldsData.quantity.forEach(qty => {
-		if (!quantityRegExp.test(qty)) return false;
-	});
+	if (!checkQuantity(fieldsData.quantity)) return false;
 
-	fieldsData.amountPerItem.forEach(amount => {
-		if (!priceRegExp.test(amount)) return false;
-	});
+	if (!checkAmountPerItem(fieldsData.amountPerItem)) return false;
 
 	return true;
+}
+
+function checkItemName(itemNameList) {
+	let isItemNameValid = true;
+
+	itemNameList.forEach(name => { 
+		if (name == '') isItemNameValid = false;
+	});
+
+	return isItemNameValid;
+}
+
+function checkQuantity(quantityList) {
+	let isQuantityValid = true;
+
+	quantityList.forEach(qty => {
+		if (!quantityRegExp.test(qty)) isQuantityValid = false;
+	});
+
+	return isQuantityValid;
+}
+
+function checkAmountPerItem(amountPerItemList) {
+	let isAmountPerItemValid = true;
+
+	amountPerItemList.forEach(amount => {
+		if (!priceRegExp.test(amount)) isAmountPerItemValid = false;
+	});
+
+	return isAmountPerItemValid;
 }
 
 function getFieldsData() {
@@ -238,14 +263,16 @@ function generateBodyRequest(fieldsData) {
 	}
 
 	data.queryId = tg.initDataUnsafe.query_id;
-
 	return data;
 }
 
-function checkResult() {
-	let data = generateBodyRequest();
-	sendData(data);
-}
+// function checkResult() {
+// 	console.log('valid: ' + fieldsValidate(getFieldsData()))
+// 	let data = generateBodyRequest(getFieldsData());
+
+	
+// 	sendData(data);
+// }
 
 async function sendData(data)  {
 	const response = await fetch("https://www.corezoid.com/api/2/json/public/1183175/3427feaf42c671b9b22a0d8a0c31169cb3e049df", {
