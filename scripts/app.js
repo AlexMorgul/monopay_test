@@ -33,72 +33,71 @@ Telegram.WebApp.onEvent('themeChanged', function() {
 });
 
 Telegram.WebApp.onEvent('mainButtonClicked', function() {
-	let isDataValid = validateValue();
-	
-	if (isDataValid) {
-		let data = generateBodyRequest();
-		sendData(data);
-	}
-});
-
-
-// functions
-function validateValue() {
+	let fieldsData = null;
 	let isAmountValid = priceRegExp.test(amount.value);
 
 	if (!isAmountValid) {
-		errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
-			'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
-		window.scrollTo(0,0);
+		setErrors();
 		return false;
 	}
 
 	if (isExtend) {
-		for (let i = 0; i < nPositions; i++) {
-			const itemName = document.getElementById('itemName_'+ (i+1));
-			const quantity = document.getElementById('quantity_'+ (i+1));
-			const amountPerItem = document.getElementById('amountPerItem_'+ (i+1));
+		fieldsData = getFieldsData();
+		let isDataValid = fieldsValidate(fieldsData);
 
-			let isItemNameValid = itemName.value != '';
-			let isQuantityValid = quantityRegExp.test(quantity.value);
-			let isAmountPerItemValid = priceRegExp.test(amountPerItem.value);
-
-			if (!isItemNameValid || !isQuantityValid || !isAmountPerItemValid) {
-				errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
-				'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
-
-				window.scrollTo(0,0);
-				return false;
-			}
+		if (!isDataValid) {
+			setErrors();
+			return false;
 		}
 	}
 
+	let data = generateBodyRequest(fieldsData);
+	sendData(data);
+});
+
+
+// functions
+function fieldsValidate(fieldsData) {
+	fieldsData.itemName.forEach(name => {
+		if (name == '') return false;
+	});
+
+	fieldsData.quantity.forEach(qty => {
+		if (!quantityRegExp.test(qty)) return false;
+	});
+
+	fieldsData.amountPerItem.forEach(amount => {
+		if (!priceRegExp.test(amount)) return false;
+	});
+
 	return true;
+}
 
-	// if (isExtend) {
-	// 	let isItemNameValid = itemName.value != '';
-	// 	let isQuantityValid = quantityRegExp.test(quantity.value);
-	// 	let isAmountPerItemValid = amountPerItemRegExp.test(amountPerItem.value);
+function getFieldsData() {
+	const itemNameList = document.querySelectorAll('#itemName');
+	const quantityList = document.querySelectorAll('#quantity');
+	const amountPerItemList = document.querySelectorAll('#amountPerItem');
 
-	// 	if (isAmountValid && isItemNameValid && isQuantityValid && isAmountPerItemValid) {
-	// 		errors.innerHTML = '';
-	// 		isDataValid = true;
-	// 	} else {
-	// 		errors.innerHTML = '<p style="color: red; margin-left: 11.25px; font-size: 13px;">' +
-	// 		'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
+	let fieldsData = {
+		'itemName': [],
+		'quantity': [],
+		'amountPerItem': []
+	};
+	
+	itemNameList.forEach(value => fieldsData.itemName.push(value.value));
+	quantityList.forEach(value => fieldsData.quantity.push(value.value));
+	amountPerItemList.forEach(value => fieldsData.amountPerItem.push(value.value));
 
-	// 		isDataValid = false;
-	// 	}
-	// } else {
-	// 	if (isAmountValid) {
-	// 		errors.innerHTML = '';
-	// 		isDataValid = true;
-	// 	} else {
-	// 		errors.innerHTML = '<p style="color: red; margin-left: 11.25px;">- Лише ціле або дійсне число (.00)</p>';
-	// 		isDataValid = false;
-	// 	}
-	// }
-} 
+	return fieldsData;
+}
+
+function setErrors() {
+	let error = '<p style="color: red; margin-left: 11.25px; font-size: 12px;">' +
+	'- Перевірте вказані дані! (формат для вартості: 123.45)</p>';
+
+	errors.innerHTML = error;
+	window.scrollTo(0,0);
+}
 
 function isPaymentExtended() {
 	if (chbox.checked) {
@@ -124,9 +123,9 @@ function addItem() {
 }
 
 function createItem() {
-	let indexName = 'itemName_' + nPositions;
-	let indexQuantity = 'quantity_' + nPositions;
-	let indexAmountPerItem = 'amountPerItem_' + nPositions;
+	let indexName = 'itemName';
+	let indexQuantity = 'quantity';
+	let indexAmountPerItem = 'amountPerItem';
 
 	const hr = document.createElement('hr');
 	const br = document.createElement('br');
@@ -216,13 +215,9 @@ function setColorScheme() {
 	}
 }
 
-function generateBodyRequest() {
-	const formData = new FormData(formElement);
-	
-	const amount = Number(formData.get('amount'));
-	let data = {
-		"amount": Math.round(amount*100)
-	};
+function generateBodyRequest(fieldsData) {
+	const totalPrice = Math.round(Number(amount.value)*100);
+	let data = { "amount": totalPrice };
 
 	if (isExtend) {
 		data.merchantPaymInfo = {
@@ -230,28 +225,24 @@ function generateBodyRequest() {
 		};
 
 		for (let i = 0; i < nPositions; i++) {
-
-			let name = formData.get('itemName_' + (i+1));
-			let qty = Number(formData.get('quantity_' + (i+1)));
-			let sum = Number(formData.get('amountPerItem_' + (i+1)));
+			let name = fieldsData.itemName[i];
+			let qty = Number(fieldsData.quantity[i]);
+			let sum = Math.round(Number(fieldsData.amountPerItem[i] * 100));
 
 			data.merchantPaymInfo.basketOrder.push({
 				"name": name,
 				"qty": qty,
-				"sum": Math.round(sum*100),
+				"sum": sum,
 			});
 		}
-	}	
+	}
 
 	data.queryId = tg.initDataUnsafe.query_id;
-
-	console.log(data);
 
 	return data;
 }
 
 function checkResult() {
-
 	let data = generateBodyRequest();
 	sendData(data);
 }
