@@ -151,6 +151,7 @@ function createItem() {
 	let indexName = 'itemName';
 	let indexQuantity = 'quantity';
 	let indexAmountPerItem = 'amountPerItem';
+	let currentItemID = nPositions;
 
 	const hr = document.createElement('hr');
 	const br = document.createElement('br');
@@ -161,8 +162,16 @@ function createItem() {
 	
 	// p 'item'
 	let p = document.createElement('p');
-	p.append('Товар №' + nPositions);
+	p.append('Товар №' + nPositions + ' ');
 	p.className = 'item_text';
+
+	// button 'delete item'
+	let button = document.createElement('button');
+	button.className = 'delete';
+	button.onclick = function() {
+		removeItem(currentItemID);
+	};
+	p.appendChild(button);
 
 	// label & input 'name'
 	const labelItemName = document.createElement('label');
@@ -227,6 +236,26 @@ function createItem() {
 	div.appendChild(item);
 
 	return div;
+}
+
+function removeItem(itemID) {
+	let itemToRemove = document.getElementById('item_' + itemID);
+	goods.removeChild(itemToRemove);
+
+	if (nPositions == 1) {
+		chbox.checked = false;
+		isPaymentExtended();
+	}  else {
+		// for (let i = itemID+1; i <= nPositions; i++) {
+		// 	let currentItem = document.getElementById('item_' + i);
+		// 	currentItem.id = 'item_' + (i+1);
+
+		// 	let children = currentItem.children;
+		// 	children.item(1).append('Товар №' + (itemID) + ' ');
+		// }
+	}
+	
+	nPositions--;
 }
 
 function setColorScheme() {
