@@ -8,7 +8,7 @@ const goods = document.getElementById('goods');
 const amount = document.getElementById('amount');
 const errors = document.getElementById('errors');
 
-const priceRegExp = /^\d+(?:[.]\d{1,2})?$/;
+const priceRegExp = /^([1-9])[0-9]*(?:[.]\d{1,2})?$/;
 const quantityRegExp = /^([1-9])[0-9]*$/;
 
 var nPositions = 0;
@@ -271,7 +271,7 @@ function generateBodyRequest(fieldsData) {
 // 	let data = generateBodyRequest(getFieldsData());
 
 	
-// 	sendData(data);
+// 	// sendData(data);
 // }
 
 async function sendData(data)  {
