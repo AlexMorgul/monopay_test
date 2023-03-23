@@ -21,7 +21,7 @@ tg.ready();
 
 //  events
 amount.addEventListener('input', function() {
-	this.value != '' ? tg.MainButton.show() : tg.MainButton.hide();
+	this.value !== '' ? tg.MainButton.show() : tg.MainButton.hide();
 });
 
 formElement.addEventListener("submit", function (event) {
@@ -72,7 +72,7 @@ function checkItemName(itemNameList) {
 	let isItemNameValid = true;
 
 	itemNameList.forEach(name => { 
-		if (name == '') isItemNameValid = false;
+		if (name === '') isItemNameValid = false;
 	});
 
 	return isItemNameValid;
@@ -129,7 +129,7 @@ function isPaymentExtended() {
 		extented.style.display = "";
 		isExtend = true;
 
-		if (nPositions == 0) {
+		if (nPositions === 0) {
 			nPositions = 1;
 			item = createItem();
 			goods.appendChild(item);
@@ -143,7 +143,7 @@ function isPaymentExtended() {
 
 function addItem() {
 	nPositions++;
-	item = createItem();
+	let item = createItem();
 	goods.appendChild(item);
 }
 
@@ -242,17 +242,25 @@ function removeItem(itemID) {
 	let itemToRemove = document.getElementById('item_' + itemID);
 	goods.removeChild(itemToRemove);
 
-	if (nPositions == 1) {
+	if (nPositions === 1) {
 		chbox.checked = false;
 		isPaymentExtended();
 	}  else {
-		// for (let i = itemID+1; i <= nPositions; i++) {
-		// 	let currentItem = document.getElementById('item_' + i);
-		// 	currentItem.id = 'item_' + (i+1);
+		for (let i = itemID+1; i <= nPositions; i++) {
+			let currentItem = document.getElementById('item_' + i);
+			currentItem.id = 'item_' + (i-1);
 
-		// 	let children = currentItem.children;
-		// 	children.item(1).append('Товар №' + (itemID) + ' ');
-		// }
+			let children = currentItem.children;
+
+			let button = document.createElement('button');
+			button.className = 'delete';
+			button.onclick = function() {
+				removeItem(i-1);
+			};
+
+			children.item(1).textContent = ('Товар №' + (i-1) + ' ');
+			children.item(1).appendChild(button);
+		}
 	}
 	
 	nPositions--;
