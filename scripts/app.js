@@ -312,7 +312,7 @@ function generateBodyRequest(fieldsData) {
 // }
 
 async function sendData(data)  {
-	const response = await fetch("https://monopaytest.alexmorgul1.repl.co", {
+	const response = await fetch("https://www.corezoid.com/api/2/json/public/1183175/3427feaf42c671b9b22a0d8a0c31169cb3e049df", {
 		method: 'POST',
 		headers: {},
 		body: JSON.stringify(data)
